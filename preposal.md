@@ -2,10 +2,10 @@
 
 ## What idea(s) do you have for your final project?
 
-#1. Discord bot
+# 1. Discord bot
 # When user call my bot, it will ask user to type which game he wants to play.
 # If user wants to check weather, my bot also can show.
-#2. Shopping Website
+# 2. Shopping Website
 
 ## If you plan to collaborate with one or two classmates, what are their names?
 
