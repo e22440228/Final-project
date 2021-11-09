@@ -21,4 +21,4 @@ async def on_message(message):
     if message.content == 'game':
         await message.channel.send('Which one?')
 
-client.run('OTA3NjI4NDE4MDkzNDM2OTQ5.YYp81Q.S3isko1SeUuGlkeww9vg21pzGio') #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
+client.run('') #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
