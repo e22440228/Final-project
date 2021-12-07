@@ -225,7 +225,7 @@ async def on_reaction_add(reaction, user):
             embed.add_field(name='Dealer', value=example['dealer_number'], inline=False)
             embed.add_field(name='Current Value',value = value['dealer_value'],inline=False)
             await channel.send(embed=embed)
-
+            
             if value['player_value'] == 21:
                 await channel.send('win')
                 example['player_number'] = ''
@@ -251,19 +251,20 @@ async def on_reaction_add(reaction, user):
                 example['dealer_number'] = ''
                 value['player_value'] = 0
                 value['dealer_value'] = 0
-            elif value['dealer_value'] > value['player_value']:
-                await channel.send('lose')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            elif value['dealer_value'] < value['player_value']:
-                await channel.send('win')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            else:
+            if value['dealer_value'] >= 17:
+                if value['dealer_value'] > value['player_value']:
+                    await channel.send('lose')
+                    example['player_number'] = ''
+                    example['dealer_number'] = ''
+                    value['player_value'] = 0
+                    value['dealer_value'] = 0
+                elif value['dealer_value'] < value['player_value']:
+                    await channel.send('win')
+                    example['player_number'] = ''
+                    example['dealer_number'] = ''
+                    value['player_value'] = 0
+                    value['dealer_value'] = 0
+            elif value['player_value'] == value['dealer_value']:
                 await channel.send('draw')
                 example['player_number'] = ''
                 example['dealer_number'] = ''
@@ -273,4 +274,4 @@ async def on_reaction_add(reaction, user):
             return example,value
 
 
-bot.run('***')
+bot.run('OTA3NjI4NDE4MDkzNDM2OTQ5.YYp81Q.q5IoxNYoWPJGa2tIWVpwFt4I2xc')
