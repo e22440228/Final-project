@@ -183,6 +183,7 @@ async def on_reaction_add(reaction, user):
             special = {11:'J',12:'Q',13:"K"}
             player_card = ''
             dealer_card = ''
+            
             numbers = randomnumber()
             dealer_number = randomnumber()
             if value['dealer_value'] >= 17:
