@@ -1,0 +1,101 @@
+import discord
+import random
+from discord.ext.commands.bot import Bot
+from discord.ext import commands
+from discord import Embed
+from discord import message
+bot = commands.Bot
+@bot.event
+async def on_message(message):
+    data = []
+    async for content in message.channel.history(limit = 1):
+        if message.type == Embed:
+            await message.add_reaction('\U0001F44D')
+@bot.command()
+async def test(ctx):
+    special = {10:'A',11:'B',12:'D',13:"E"}
+    player_card = ''
+    dealer_card = ''
+    numbers = random.randint(1,13)
+    dealer_number = random.randint(1,13)
+
+    Spade = {1 : '\U0001F0A1', 2 : '\U0001F0A2', 3 : '\U0001F0A3', 4 : '\U0001F0A4', 5 : '\U0001F0A5', 6 : '\U0001F0A6', 7 : '\U0001F0A7', 8 : '\U0001F0A8', 9 : '\U0001F0A9', 10 : '\U0001F0AA', 'J' : '\U0001F0AB', 'Q' : '\U0001F0AD', 'K' : '\U0001F0AE'}
+    heart = {1 : '\U0001F0B1', 2 : '\U0001F0B2', 3 : '\U0001F0B3', 4 : '\U0001F0B4', 5 : '\U0001F0B5', 6 : '\U0001F0B6', 7 : '\U0001F0B7', 8 : '\U0001F0B8', 9 : '\U0001F0B9', 10 : '\U0001F0BA', 'J' : '\U0001F0BB', 'Q' : '\U0001F0BD', 'K' : '\U0001F0BE'}
+    Diamonds = {1 : '\U0001F0C1', 2 : '\U0001F0C2', 3 : '\U0001F0C3', 4 : '\U0001F0C4', 5 : '\U0001F0C5', 6 : '\U0001F0C6', 7 : '\U0001F0C7', 8 : '\U0001F0C8', 9 : '\U0001F0C9', 10 : '\U0001F0CA', 'J' : '\U0001F0CB', 'Q' : '\U0001F0CD', 'K' : '\U0001F0CE'}
+    Clubs = {1 : '\U0001F0D1', 2 : '\U0001F0D2', 3 : '\U0001F0D3', 4 : '\U0001F0D4', 5 : '\U0001F0D5', 6 : '\U0001F0D6', 7 : '\U0001F0D7', 8 : '\U0001F0D8', 9 : '\U0001F0D9', 10 : '\U0001F0DA', 'J' : '\U0001F0DB', 'Q' : '\U0001F0DD', 'K' : '\U0001F0DE'}
+    Color_Shape = random.choice(['\U00002664','\U00002661','\U00002667','\U00002662'])
+    player_card = Color_Shape + str(numbers)
+    dealer_card = Color_Shape + str(dealer_number)
+    embed=discord.Embed(title=ctx.message.author, description='BlackJack', color=0xf40b0b)
+    embed.set_author(name='about',icon_url=ctx.message.author.avatar_url)
+    embed.add_field(name='You', value= player_card, inline=False)
+    embed.add_field(name='Dealer', value=dealer_card, inline=False)
+    await ctx.send(embed=embed)
+
+@bot.event
+async def on_message(message):
+    if message.reactions.count('\U0001F44D') >= 2:
+        print('123')
+        
+    await bot.process_commands(message)
+
+'''
+@bot.event
+async def on_message(message):
+    data = []
+    
+    #async for content in message.channel.history(limit = 1):
+    
+    if message.author == bot.user:
+        if type(message) != str:
+            await message.add_reaction('\U0001F44D')
+            await message.add_reaction('\U0001F44E')
+    await bot.process_commands(message)
+
+'''
+'''
+    if value['player_value'] == 21:
+        await channel.send('win')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+
+    elif value['dealer_value'] == 21:
+        await channel.send('lose')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+    elif value['dealer_value'] >21 and value['player_value'] <=21:
+        await channel.send('win')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+                
+    elif value['player_value'] > 21:
+        await channel.send('lose')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+    elif value['dealer_value'] > value['player_value']:
+        await channel.send('lose')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+    elif value['dealer_value'] < value['player_value']:
+        await channel.send('win')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+    elif value['dealer_value'] == value['player_value']:
+        await channel.send('draw')
+        example['player_number'] = ''
+        example['dealer_number'] = ''
+        value['player_value'] = 0
+        value['dealer_value'] = 0
+'''

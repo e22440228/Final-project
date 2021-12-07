@@ -41,7 +41,7 @@ value = {'player_value':0,'dealer_value':0}
 
 
 @bot.command()
-async def BJ(ctx):
+async def test(ctx):
     special = {11:'J',12:'Q',13:"K"}
     player_card = ''
     dealer_card = ''
@@ -105,7 +105,7 @@ async def BJ(ctx):
 async def on_reaction_add(reaction, user):
     emoji = reaction.emoji
     count = 0
-    channel = bot.get_channel(917573912752185384)
+    channel = bot.get_channel(791205845588377600)
     change = 0
     if user.bot:
         return
@@ -159,27 +159,15 @@ async def on_reaction_add(reaction, user):
         embed.add_field(name='Dealer', value=example['dealer_number'], inline=False)
         embed.add_field(name='Current Value',value = value['dealer_value'],inline=False)
 
-        await channel.send(embed=embed)
-
-        if value['player_value'] == 21:
-            await channel.send('win')
-            example['player_number'] = ''
-            example['dealer_number'] = ''
-            value['player_value'] = 0
-            value['dealer_value'] = 0
-        elif value['player_value'] > 21:
-            await channel.send('lose')
-            example['player_number'] = ''
-            example['dealer_number'] = ''
-            value['player_value'] = 0
-            value['dealer_value'] = 0        
+        await channel.send(embed=embed)        
 
         return example,value
         #print(test(reaction)[1])
         
     elif count <= -1:
         # set while loop, until the dealer numers >, =, < player number
-
+            if value['dealer_value'] >= 17:
+                change = 1
             special = {11:'J',12:'Q',13:"K"}
             player_card = ''
             dealer_card = ''
@@ -225,51 +213,51 @@ async def on_reaction_add(reaction, user):
             embed.add_field(name='Current Value',value = value['dealer_value'],inline=False)
             await channel.send(embed=embed)
 
-            if value['player_value'] == 21:
-                await channel.send('win')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-
-            elif value['dealer_value'] == 21:
-                await channel.send('lose')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            elif value['dealer_value'] >21:
-                await channel.send('win')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            elif value['player_value'] > 21:
-                await channel.send('lose')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            elif value['dealer_value'] > value['player_value']:
-                await channel.send('lose')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            elif value['dealer_value'] < value['player_value']:
-                await channel.send('win')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-            else:
-                await channel.send('draw')
-                example['player_number'] = ''
-                example['dealer_number'] = ''
-                value['player_value'] = 0
-                value['dealer_value'] = 0
-
             return example,value
+    if change == 1:
 
+        if value['player_value'] == 21:
+            await channel.send('win')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
+
+        elif value['dealer_value'] == 21:
+            await channel.send('lose')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
+        elif value['dealer_value'] >21:
+            await channel.send('win')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
+        elif value['player_value'] > 21:
+            await channel.send('lose')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
+        elif value['dealer_value'] > value['player_value']:
+            await channel.send('lose')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
+        elif value['dealer_value'] < value['player_value']:
+            await channel.send('win')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
+        elif value['dealer_value'] == value['player_value']:
+            await channel.send('draw')
+            example['player_number'] = ''
+            example['dealer_number'] = ''
+            value['player_value'] = 0
+            value['dealer_value'] = 0
 
 bot.run('***')

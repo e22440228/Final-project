@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
+import GameBot_Test
 bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
-    print('>> Bot is online<<')
+    print('== Bot is online ==')
 @bot.event
 async def on_member_join(member):
     channel = bot.get_channel(912124958958817361)
@@ -35,7 +36,7 @@ async def on_message(message):
         await message.channel.send('Which one?')
         await message.channel.send('BlackJack, DND')
     if message.content == 'BlackJack':
-        await message.channel.send('Not yet deployment')
+        await message.channel.send(GameBot_Test.test)
 
 
 bot.run('***') #TOKEN 在剛剛 Discord Developer 那邊「BOT」頁面裡面
